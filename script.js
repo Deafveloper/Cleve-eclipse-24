@@ -1,27 +1,24 @@
-const eclipse = document.querySelector('.eclipse');
-const title = document.querySelector('.eclipse-title');
-const halfViewportWidth = window.innerWidth / 2; // Calculate half viewport width
+const title = document.getElementById("title");
+const moon = document.getElementById("moon");
+const container = document.body;
 
-title.addEventListener('click', () => {
-  eclipse.style.left = `-${halfViewportWidth}px`;  /* Move eclipse to half viewport width to the left (off-screen) */
-  eclipse.classList.add('move-eclipse'); /* Add a class to trigger animation */
-});
+title.addEventListener("click", startEclipse);
 
-eclipse.addEventListener('transitionend', () => {
-  if (eclipse.classList.contains('move-eclipse')) {
-    document.body.style.backgroundColor = '#222222'; /* Change background to dark */
-    eclipse.classList.remove('move-eclipse'); /* Remove animation class */
-  }
-});
-
-// Animation class for smooth slide effect (add to style.css)
-.move-eclipse {
-  animation: slide 120s ease-in-out; /* Animation duration and easing */
-  animation-fill-mode: forwards; /* Keep final position after animation */
+function startEclipse() {
+  container.classList.add("eclipse"); // Turn background black
+  moon.style.left = "calc(100% - 200px)"; // Move moon to the right
+  setTimeout(showWhiteSkyline, 3000); // Wait 3 seconds before next step
+  title.removeEventListener("click", startEclipse); // Disable click after start
 }
 
-@keyframes slide {
-  0% { left: -100%; } /* Start from completely off-screen */
-  100% { left: 0; }  /* End at the left edge of the viewport */
+function showWhiteSkyline() {
+  document.getElementById("skyline").src = "white_skyline.png"; // Change image
+  moon.style.left = "-200px"; // Move moon to the left (hidden)
+  setTimeout(resetEclipse, 180000); // Wait 3 minutes before reset
 }
 
+function resetEclipse() {
+  container.classList.remove("eclipse"); // Turn background white
+  document.getElementById("skyline").src = "black_skyline.png"; // Change image back
+  title.addEventListener("click", startEclipse); // Enable click again
+}
