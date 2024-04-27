@@ -1,24 +1,29 @@
-const title = document.getElementById("title");
-const moon = document.getElementById("moon");
-const container = document.body;
+document.addEventListener('DOMContentLoaded', () => {
+  const moon = document.querySelector('.moon');
+  const blackSkyline = document.getElementById('blackcleve');
 
-title.addEventListener("click", startEclipse);
+  // Function to start animations
+  const startAnimations = () => {
+    // Slide the moon in from the left
+    moon.style.left = '50%';
 
-function startEclipse() {
-  container.classList.add("eclipse"); // Turn background black
-  moon.style.left = "calc(100% - 200px)"; // Move moon to the right
-  setTimeout(showWhiteSkyline, 3000); // Wait 3 seconds before next step
-  title.removeEventListener("click", startEclipse); // Disable click after start
-}
+    // After the moon animation completes, fade out the black skyline
+    setTimeout(() => {
+      blackSkyline.style.opacity = '0';
+    }, 30000); // 30 seconds (matching moon animation duration)
 
-function showWhiteSkyline() {
-  document.getElementById("skyline").src = "white_skyline.png"; // Change image
-  moon.style.left = "-200px"; // Move moon to the left (hidden)
-  setTimeout(resetEclipse, 180000); // Wait 3 minutes before reset
-}
+    // After both animations complete, change the background color to black
+    setTimeout(() => {
+      document.body.style.backgroundColor = 'black';
 
-function resetEclipse() {
-  container.classList.remove("eclipse"); // Turn background white
-  document.getElementById("skyline").src = "black_skyline.png"; // Change image back
-  title.addEventListener("click", startEclipse); // Enable click again
-}
+      // Replace the black skyline with a new image
+      blackSkyline.src = 'clevelandwhiteskyline600.png'; // Update with the path to your new image
+      blackSkyline.alt = 'Cleveland White Skyline'; // Update alt text for accessibility
+      blackSkyline.style.opacity = '1'; // Make the new image visible
+    }, 31000); // 30 seconds + 1 second (to ensure complete fade out before background change)
+  };
+
+  // Call startAnimations function after a short delay to ensure CSS transitions apply
+  setTimeout(startAnimations, 100);
+});
+

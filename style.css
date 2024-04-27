@@ -1,42 +1,51 @@
 body, html {
   margin: 0;
   padding: 0;
-  height: 100vh; 
-  width: 100vw; 
-  background-color: white; 
-  transition: background-color 190s; 
-  display: flex; 
-  justify-content: center; 
-  align-items: center; 
+  height: 100vh;
+  width: 100vw;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  width: 100%;
+  text-align: center;
 }
 
 .eclipse-container {
+  position: relative;
+  width: 100%; 
+  height: 600px;
+  position: relative; 
   overflow: hidden;
 }
 
 
 .blackskyline {
-  max-width: 600px;
-  max-height: 600px;
-  margin-top: -20px;
-  margin-left: 200px;
-
+  position: absolute;
+  margin-top: 8px;
+  top: 0;
+  left: 0;
+  width: 100%; 
+  opacity: 1; 
+  transition: opacity 1s ease; 
 }
 
-
-/*
 .moon {
-  width: 200px;
-  height: 200px;
+  width: 220px;
+  height: 220px;
   border-radius: 50%;
   background-color: black;
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 40%;
+  left: 30%; 
   transform: translate(-50%, -50%);
-  transition: left 190s ease-in-out;
+  transition: left 30s ease; 
 }
-*/
+
+
 
 
   
